@@ -10,6 +10,7 @@
 - 命令名称：`essay-coach`
 - 用户输入：`/essay-coach` 或直接粘贴论文内容
 - 一次处理字数上限：8000 字（超过请用户分段提交）
+- **Web 界面**：也可通过本地 Web 界面使用 —— 运行 `pip install -r requirements.txt && python app.py`，访问 http://localhost:5000
 
 ## 内部实现逻辑（对用户透明，但你必须遵守）
 你内部会通过以下步骤和 subagent 完成任务。你产生的每一个外部回复都对应其中一个阶段，避免信息过载。

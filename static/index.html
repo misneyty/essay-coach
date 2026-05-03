@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essay Coach 论文写作教练</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <h1>🧠 Essay Coach 论文写作教练</h1>
+  <span class="subtitle">多维度诊断 · 结构化反馈 · 引导式优化</span>
+</header>
+
+<main id="app">
+
+  <!-- INPUT STATE -->
+  <section id="state-input" class="state-panel">
+    <div class="card">
+      <h2>提交论文</h2>
+      <p class="hint">粘贴你的论文全文（最多 8000 字符），写作教练将逐项分析并提供改进建议。</p>
+      <textarea
+        id="essay-input"
+        placeholder="在此粘贴论文内容...&#10;&#10;支持中文和英文论文。"
+        maxlength="8000"
+        rows="18"
+      ></textarea>
+      <div class="input-footer">
+        <span id="char-count" class="char-count">0 / 8000</span>
+        <button id="btn-submit" class="btn btn-primary" disabled>提交分析</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARSING STATE -->
+  <section id="state-parsing" class="state-panel hidden">
+    <div class="card center">
+      <div class="spinner"></div>
+      <p>正在解析论文结构...</p>
+    </div>
+  </section>
+
+  <!-- CONFIRM STRUCTURE STATE -->
+  <section id="state-confirm" class="state-panel hidden">
+    <div class="card">
+      <h2>🔍 结构地图 Structure Map</h2>
+      <div id="structure-map-content" class="structure-map"></div>
+      <div id="plagiarism-warning" class="plagiarism-warning hidden"></div>
+      <div class="btn-group">
+        <button id="btn-confirm" class="btn btn-primary">确认，开始逐项分析</button>
+        <button id="btn-reparse" class="btn btn-secondary">重新解析</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANALYZING STATE -->
+  <section id="state-analyzing" class="state-panel hidden">
+    <div class="card">
+      <div class="progress-bar-container">
+        <div id="progress-fill" class="progress-fill"></div>
+        <div id="progress-label" class="progress-label">0/0</div>
+      </div>
+      <div id="stage-label" class="stage-label"></div>
+      <div id="analysis-result" class="result-content"></div>
+      <div class="btn-group" id="analyze-buttons">
+        <button id="btn-continue" class="btn btn-primary">继续 ▶</button>
+        <button id="btn-modify" class="btn btn-secondary">深入讨论某点...</button>
+      </div>
+    </div>
+    <!-- Modify dialog -->
+    <div id="modify-dialog" class="card modify-card hidden">
+      <h3>深入讨论</h3>
+      <label for="modify-point">请输入你想深入讨论的要点：</label>
+      <input type="text" id="modify-point" placeholder="例如：逻辑谬误部分、主题句修改...">
+      <div class="btn-group">
+        <button id="btn-modify-submit" class="btn btn-primary">提交</button>
+        <button id="btn-modify-cancel" class="btn btn-secondary">取消</button>
+      </div>
+      <div id="modify-result" class="result-content hidden"></div>
+    </div>
+  </section>
+
+  <!-- ASSESSMENT STATE -->
+  <section id="state-assessment" class="state-panel hidden">
+    <div class="card">
+      <h2>📋 综合评估 Comprehensive Assessment</h2>
+      <div id="assessment-result" class="result-content"></div>
+      <div class="btn-group">
+        <button id="btn-questions-yes" class="btn btn-primary">生成思考题</button>
+        <button id="btn-questions-skip" class="btn btn-secondary">跳过</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUESTIONS STATE -->
+  <section id="state-questions" class="state-panel hidden">
+    <div class="card">
+      <h2>💡 思考题 Thinking Questions</h2>
+      <div id="questions-result" class="result-content"></div>
+      <button id="btn-reset" class="btn btn-primary">分析新论文</button>
+    </div>
+  </section>
+
+  <!-- ERROR STATE -->
+  <section id="state-error" class="state-panel hidden">
+    <div class="card error-card">
+      <h2>出错了</h2>
+      <p id="error-message"></p>
+      <button id="btn-error-reset" class="btn btn-primary">重新开始</button>
+    </div>
+  </section>
+
+</main>
+
+<script src="/app.js"></script>
+</body>
+</html>
